@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- question 1 -->
+    <form action="">
+        <!-- text - field -->
+        <input type="text" name="text-inp" id=""><br>
+        <textarea name="textarea" id="" cols="30" rows="10">
+            hii there ...😍
+        </textarea><br>
+        <!-- drop downs -->
+        <select name="selection" id="">
+            <option value="hp">HP</option>
+            <option value="asus">Asus</option>
+            <option value="mi">Mi</option>
+        </select><br>
+        <input type="submit" value="submit">
+
+    </form><br><br><br>
+    <!-- not working on browser -->
+    <!-- <center>
+        <frameset rows="25%, 50%, 25%">
+            <frame name="top" src="./../../12-09/exersice-on-table/index.html">
+            <frame name="main" src="frame2.html">
+            <frame name="bottom" src="frame3.html">
+
+        </frameset>
+    </center> -->
+
+    <center>
+        <form action="http://localhost:3030">
+            <table border="1" cellspacing="0" cellpadding="10" >
+                <thead>
+                    <th colspan="2">Sign In</th>
+                </thead>
+                <tr>
+                    <td>E-mail</td>
+                    <td><input type="text" name="E-mail" id=""></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="password" id=""></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><button type="submit">Sign In</button></td>
+                </tr>
+            </table>
+        </form>
+    </center>
+    <br><br><br>
+    <center>
+       <form action="" method="dialog">
+        <table border="1" bgcolor="lightblue">
+            <tr>
+                <th colspan="2" color="red" bgcolor="yellow">Registration form </th>
+            </tr>
+            <tr>
+                <td>Enter Name</td>
+                <td><input type="" name="name" id="" minlength="3" maxlength=""></td>
+            </tr>
+            <tr>
+                <td>Enter password</td>
+                <td><input type="password" name="password" id=""></td>
+            </tr>
+            <tr>
+                <td>Enter Address</td>
+                <td><textarea name="address" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td>Select Game</td>
+                <td>
+                    <input type="checkbox" name="" id="">hockey <br>
+                    <input type="checkbox" name="" id="">batmilton <br>
+                </td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="male" id="">Male
+                    <input type="radio" name="male" id="">Female
+                </td>
+            </tr>
+            <tr>
+                <td>Select Qualification</td>
+                <td>
+                    <select name="Qualification" id="">
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Select photo</td>
+                <td>
+                    <input type="file" name="photo" id="">
+                </td>
+            </tr>
+            <tr>
+                <td><input type="reset" value="reset"></td>
+                <td><input type="submit" value="submit form "></td>
+            </tr>
+        </table>
+       </form>
+    </center>
+</body>
+</html>
