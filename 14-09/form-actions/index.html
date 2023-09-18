@@ -9,10 +9,17 @@
     <ul>
         <li><b><u>action attribute of form</u></b></li>
     </ul>
-    <form action="/form-action" method="post" name="form-1">
+    <form action="/" method="get" name="form-1">
         <input type="text" name="name" id=""><br>
         <input type="number" name="age" id=""><br>
         <input type="submit" value="submit-btn" name="button">
     </form>
 </body>
+<script>
+    const fetchs = async ()=>{
+       const data = await fetch("http://localhost:3000/");
+       console.log(data)
+    }
+    fetchs()
+</script>
 </html>

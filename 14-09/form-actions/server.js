@@ -17,17 +17,19 @@ app.get("/",(req,res)=>{
 })
 
 // by this method we get the data of form 
-// app.get("/form-action",(req,res)=>{
-//     console.log(req.query)
-//     res.send(req.query);
-// })
+app.get("/form-action",(req,res)=>{
+    console.log(req.query)
+    res.send(req.query);
+    res.sendFile(__dirname+"/index.html");
+})
 
 // getting data from form when form use post method to send data ..
 
-app.post("/form-action",(req,res)=>{ // /form-action use because i give "/form-action" value in "action" attribute of form in html side..
+app.post("/",(req,res)=>{ // /form-action use because i give "/form-action" value in "action" attribute of form in html side..
 
-    res.send(req.body)// post method data send in body which is sequre and slow also
+    // res.send(req.body)// post method data send in body which is sequre and slow also
     // res.send(req.query)
+    // res.sendFile(__dirname+"/index.html");
 })
 server.listen(3000,()=>{
     console.log("http://localhost:3000");
