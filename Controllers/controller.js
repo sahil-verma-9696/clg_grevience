@@ -1,10 +1,13 @@
 const Students = require("./../Model/students");
 
 const students = async (req,res)=>{
+   try {
     const response = await Students.find();
     console.log(response);
     res.json(response);
-    // res.send("hii")
+   } catch (error) {
+    console.log(error)
+   }
 }
 
 module.exports = {
