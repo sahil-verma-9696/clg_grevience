@@ -14,6 +14,9 @@ const serveHome = (req,res)=>{
     res.render("home");
 }
 
+// const serveProfile = (req,res)=>{
+
+// }
 module.exports = {
     students,
     serveHome,
