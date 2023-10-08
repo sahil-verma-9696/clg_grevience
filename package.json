@@ -1,0 +1,20 @@
+{
+  "name": "griveances",
+  "version": "1.0.0",
+  "description": "This is college project basically a miniproject.",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sahil-verma-9696/clg_grevience"
+  },
+  "author": "Mr. Sahil Verma",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.6.0" 
+  }
+}
