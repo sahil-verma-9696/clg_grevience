@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+    background-color: red;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+    box-shadow: 0 0 95px black;
+}
+
+nav h1 {
+    margin-left: 30px;
+    font-weight: bolder;
+    font-size: 62px;
+    text-shadow: 5px 13px 9px black;
+    -webkit-text-stroke: 2px white;
+}
+
+.links {
+    display: flex;
+    gap: 100px;
+}
+
+.links a {
+    margin-right: 30px;
+    color: white;
+    font-size: 28px;
+}
+.grieveance{
+    margin-top: 10px;
+    font-weight: bolder;
+    position: relative;
+}
+.grieveance::before{
+    content: "";
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    width: 0%;
+    height: 5%;
+    bottom: 13px;
+    transition: all ease-in-out .7s;
+
+}
+
+.grieveance:hover::before{
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.505);
+    width: 100%;
+    height: 5%;
+    bottom: 13px;
+}
+
+.loginBtn{
+    font-size: 25px;
+    font-weight: bolder;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: black;
+    transition: all ease-in-out .5s;
+}
+
+.loginBtn:hover{
+    color: black;
+    background-color: white;
+    font-weight: bolder;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+.card{
+    /* border: 2px solid black; */
+    width: 430px;
+    height: 430px;
+    transform: translateY(40%);
+    border-radius: 50px;
+}
+
+.card:hover{
+    box-shadow: 0px 0px 15px black;
+}
+
+.card img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+}

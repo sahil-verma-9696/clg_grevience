@@ -10,7 +10,11 @@ const students = async (req,res)=>{
    }
 }
 
+const serveHome = (req,res)=>{
+    res.render("home");
+}
+
 module.exports = {
     students,
-    
+    serveHome,
 }
