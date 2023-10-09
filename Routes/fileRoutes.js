@@ -3,8 +3,8 @@ const { serveHome, serveProfile, serveLogin } = require("../Controllers/fileCont
 const router = express.Router();
 
 
-router.use("/profile", serveProfile);
 router.use("/login", serveLogin);
+router.use("/profile", serveProfile);
 router.use("/", serveHome);
 
 module.exports = router;

@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="/public/Style_sheets/Profile/style.css">
+    <style>
+        
+    </style>
 </head>
 
 <body>
     <div class="container">
+        <%if(userStatus){%>
+        <a href="<%= URL%>/api/logout"> Logout</a>
+        <%}%>
         <div class="dp">
             <img src="<%= user.profilePic%>" alt="">
         </div>

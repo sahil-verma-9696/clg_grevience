@@ -14,6 +14,25 @@ body {
     position: relative;
 
 }
+.container a {
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    font-weight: bolder;
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: black;
+    transition: all ease-in-out .5s;
+}
+
+.container a:hover {
+    color: black;
+    background-color: white;
+    font-weight: bolder;
+}
 .container {
     width: 100vw;
     height: 100%;
