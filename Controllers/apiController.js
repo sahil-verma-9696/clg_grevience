@@ -1,4 +1,5 @@
 const Students = require("./../Model/students");
+
 const login = async (req, res) => {
     try {
         if (req.body) {
@@ -10,7 +11,7 @@ const login = async (req, res) => {
                         res.cookie("contact", user.contact, { maxAge: 2 * 60 * 60 * 1000 });
                         res.cookie("user", user.name, { maxAge: 2 * 60 * 60 * 1000 });
                         res.cookie("crn", user.crn, { maxAge: 2 * 60 * 60 * 1000 });
-                        res.redirect("/profile");
+                        res.redirect("/categories");
                     }else{
                         return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user already exist ❌" });
                     }

@@ -17,9 +17,14 @@ const serveProfile = async (req, res) => {
         console.log(error)
     }
 }
-module.exports = {
 
+const serveCategories = (req,res)=>{
+    res.render("categories",{ URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "hello" })
+}
+
+module.exports = {
     serveHome,
     serveProfile,
     serveLogin,
+    serveCategories,
 }
