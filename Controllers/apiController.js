@@ -6,15 +6,19 @@ const login = async (req, res) => {
             if (user) {
                 const isAuth = user.password == req.body.password;
                 if (isAuth) {
-                    res.cookie("contact", user.contact);
-                    res.cookie("user", user.name);
-                    res.cookie("crn", user.crn);
-                    res.redirect("/categories");
+                    if (!req.cookies.user) {
+                        res.cookie("contact", user.contact, { maxAge: 2 * 60 * 60 * 1000 });
+                        res.cookie("user", user.name, { maxAge: 2 * 60 * 60 * 1000 });
+                        res.cookie("crn", user.crn, { maxAge: 2 * 60 * 60 * 1000 });
+                        res.redirect("/profile");
+                    }else{
+                        return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user already exist ❌" });
+                    }
                 } else {
-                    return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user and password invalid ❌" })
+                    return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user and password invalid ❌" });
                 }
             } else {
-                return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user not found ❌" })
+                return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user not found ❌" });
             }
 
         } else {
@@ -26,11 +30,12 @@ const login = async (req, res) => {
     }
 }
 
-const logout = (req,res)=>{
+const logout = (req, res) => {
     if (req.cookies.user) {
         res.clearCookie("contact");
         res.clearCookie("user");
         res.clearCookie("crn");
+        console.log(req.cookies.crn)
         res.redirect("/home");
     } else {
         res.status(404).send("Not Found");

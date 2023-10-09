@@ -1,7 +1,7 @@
 const Students = require("../Model/students");
 
 const serveHome = (req, res) => {
-    return res.render("home", { URL: process.env.ORIGINS, userStatus: req.cookies.user });
+    return res.render("Home", { URL: process.env.ORIGINS, userStatus: req.cookies.user });
 }
 
 const serveLogin = (req, res) => {
@@ -10,9 +10,9 @@ const serveLogin = (req, res) => {
 
 const serveProfile = async (req, res) => {
     try {
-        const response = await Students.findOne({ crn: "22CSME017" });
-        console.log(response);
-        res.render("profile", { user: response, userStatus: req.cookies.user, URL: process.env.URL });
+        const response = await Students.findOne({ crn: req.cookies.crn });
+        // console.log(response);
+        return res.render("profile", { user: response, userStatus: req.cookies.crn, URL: process.env.URL });
     } catch (error) {
         console.log(error)
     }
