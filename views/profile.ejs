@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="stylesheet" href="/Style_sheets/Profile/style.css">
+    <link rel="stylesheet" href="/public/Style_sheets/Profile/style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="dp">
-            <img src="/Assets/Students/stu_1.jpg" alt="">
+            <img src="<%= user.profilePic%>" alt="">
         </div>
         <div class="content">
             <div class="left">
@@ -21,9 +21,9 @@
                     <span class="key">Gmail</span>
                 </div>
                 <div class="c2">
-                    <span class="value"> : Sahil Verma</span>
-                    <span class="value"> : 1234567890</span>
-                    <span class="value"> : Sahilverma@gmail.com</span>
+                    <span class="value"> : <%= user.name%></span>
+                    <span class="value"> : <%= user.contact%></span>
+                    <span class="value"> : <%= user.eMail%></span>
                 </div>
             </div>
             <div class="right">
@@ -33,9 +33,9 @@
                     <span class="key">Branch</span>
                 </div>
                 <div class="c2">
-                    <span class="value"> : 22CSME017</span>
-                    <span class="value"> : B Teach</span>
-                    <span class="value"> : Aiml</span>
+                    <span class="value"> : <%= user.crn%></span>
+                    <span class="value"> : <%= user.course%></span>
+                    <span class="value"> : <%= user.branch%></span>
                 </div>
             </div>
         </div>

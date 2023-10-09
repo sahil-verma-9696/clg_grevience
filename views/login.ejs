@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Public/Style_sheets/Login/style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Login</title>
+</head>
+
+<body>
+
+
+    <% if(userStatus){%>
+
+        <h1>you are already login </h1>
+
+        <%}else{%>
+            <center>
+                <div class="form-container">
+                    <h1 class="response">
+                        <%= msg%>
+                    </h1>
+
+                    <form action="<%= URL%>/api/login" method="post" class="form">
+                        <fieldset>
+                            <legend>
+                                <span class="material-symbols-outlined">
+                                    person
+                                </span>
+                            </legend>
+
+                            <input type="text" name="crn" class="userName" placeholder="crn" required>
+                            <input type="password" name="password" class="new-password" n placeholder="Enter password"
+                                required>
+                            <button type="submit" class="submitBtn">Log in</button>
+                        </fieldset>
+
+                    </form>
+
+                    <h2 class="regError"></h2>
+                </div>
+            </center>
+            <%}%>
+</body>
+<script type="module" src="/public/scripts/login/script.js"></script>
+
+</html>
