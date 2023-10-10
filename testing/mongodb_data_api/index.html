@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Data API Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MongoDB Data API Example</h1>
+    <div id="output"></div>
+
+    <script>
+        // document.addEventListener("DOMContentLoaded", async function () {
+        //     // Replace this value with your actual API key
+        //     const apiKey = "CMLUiKNsEBton1QpapUmGbaO9cv867znuJylpSCg9SzduwflXu10V1abjAxscxzB";
+
+        //     try {
+        //         // Make a request to the MongoDB Data API
+        //         const response = await fetch("https://ap-south-1.aws.data.mongodb-api.com/app/data-zuayg/endpoint/data/v1/action/find", {
+        //             method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 "Authorization": "Digest " + btoa(apiKey),//by this method i am not getting any cors error😊😀😁
+        //                 // "api-key":"CMLUiKNsEBton1QpapUmGbaO9cv867znuJylpSCg9SzduwflXu10V1abjAxscxzB"// if i use this i am getting cors error 😢😔😟😭
+        //             },
+        //             body: JSON.stringify({
+        //                 "dataSource": "Cluster0",
+        //                 "database": "complaints",
+        //                 "collection": "complaints",
+        //                 "filter": {}
+        //             })
+        //         });
+
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! Status: ${response.status}`);
+        //         }
+
+        //         const data = await response.json();
+        //         console.log(data);
+
+        //         // Handle the data as needed
+        //         const outputElement = document.getElementById("output");
+        //         outputElement.innerHTML = JSON.stringify(data, null, 2);
+        //     } catch (error) {
+        //         console.error("Error fetching data:", error);
+        //     }
+        // });
+    </script>
+</body>
+
+</html>

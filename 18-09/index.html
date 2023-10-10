@@ -1,25 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <center>
-        <h1>Calculation</h1>
-        <hr>
-        value-1: <input id="inp-1" type="number" required><br>
-        value-2: <input id="inp-2" type="number" required><br>
-        <button onclick="addition()" >Addtion</button>
-        <button onclick="subtraction()">Subtraction</button>
-        <button onclick="multiplication()">Multiplication</button>
-        <button onclick="division()">Division</button>
-        <hr>
-        result : <h1 id="ans"></h1>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/monokai-sublime.min.css">
+    <style>
+        body {
+            background-color: #272822;
+            color: #f8f8f2;
+            font-family: 'Courier New', monospace;
+        }
 
-    </center>
-    
+        pre {
+            background-color: #272822;
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <pre>
+    <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My HTML Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  &lt;p&gt;This is a sample HTML page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code>
+  </pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
-<script src="script.js"></script>
+
 </html>
