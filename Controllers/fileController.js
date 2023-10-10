@@ -5,7 +5,11 @@ const serveHome = (req, res) => {
 }
 
 const serveLogin = (req, res) => {
-    res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "hello" });
+    if (req.cookies.user) {
+        res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "😊 you are already logined😊" });
+    } else {
+        res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "😀 welcome to student grieviance 😀" });
+    }
 }
 
 const serveProfile = async (req, res) => {
@@ -18,8 +22,8 @@ const serveProfile = async (req, res) => {
     }
 }
 
-const serveCategories = (req,res)=>{
-    res.render("categories",{ URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "hello" })
+const serveCategories = (req, res) => {
+    res.render("categories", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "hello" })
 }
 
 module.exports = {

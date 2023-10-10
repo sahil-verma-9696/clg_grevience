@@ -11,19 +11,19 @@ const login = async (req, res) => {
                         res.cookie("contact", user.contact, { maxAge: 2 * 60 * 60 * 1000 });
                         res.cookie("user", user.name, { maxAge: 2 * 60 * 60 * 1000 });
                         res.cookie("crn", user.crn, { maxAge: 2 * 60 * 60 * 1000 });
-                        res.redirect("/categories");
-                    }else{
-                        return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user already exist ❌" });
+                        return res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.crn, msg: "😊 you are logined 😊" });
+                    } else {
+                        return res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.crn, msg: "❌ user already exist ❌" });
                     }
                 } else {
-                    return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user and password invalid ❌" });
+                    return res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.crn, msg: "❌ user and password invalid ❌" });
                 }
             } else {
-                return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "❌ user not found ❌" });
+                return res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.crn, msg: "❌ user not found ❌" });
             }
 
         } else {
-            return res.render("login", { URL: process.env.ORIGINS, userStatus: false, msg: "request not recive" });
+            return res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.crn, msg: "request not recive" });
         }
 
     } catch (error) {
@@ -42,7 +42,12 @@ const logout = (req, res) => {
         res.status(404).send("Not Found");
     }
 }
+
+const upload = (req, res) => {
+    res.send("file uploaded");
+}
 module.exports = {
     login,
     logout,
+    upload,
 }

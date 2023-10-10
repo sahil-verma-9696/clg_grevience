@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connect = async (collection)=>{
     const pass = process.env.MONGO_PASS;
-    const uri = `mongodb+srv://laptopsahil123:${pass}@cluster0.asnbdyu.mongodb.net/${collection}`;
+    const uri = `mongodb+srv://laptopsahil123:${pass}@cluster0.asnbdyu.mongodb.net/${collection}?retryWrites=true&w=majority&appName=AtlasApp`
 
     mongoose.set('strictQuery', false);
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
