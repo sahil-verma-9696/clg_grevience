@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Public/Style_sheets/Form/style.css">
+    <title>Grievences of : <%= title%></title>
+</head>
+
+<body>
+    <form action="<%= URL%>/" class="page">
+        <div class="header">
+            <h1>Grievences of : <span class="title"><%= title%></span></h1>
+        </div>
+        <div class="sender">
+
+        </div>
+
+        <select class="user" name="user" id="">
+            <option value="<%= user.crn%>"><%= user.crn%></option>
+            <option value="annonymous"> X_X Annonymous X_X</option>
+        </select>
+        <input class="subject" name="Subject" type="text" placeholder="Subject">
+
+        <input class="fileUpload" type="file" name="evidence" id="">
+
+        <textarea name="msg" id="" cols="30" rows="10" placeholder="Enter your Grievence"></textarea>
+
+        <div class="btn">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+    </form>
+</body>
+
+</html>
