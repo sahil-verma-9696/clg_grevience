@@ -86,6 +86,8 @@ const upload = (req, res) => {
 
             i ${req.body.user} drag the attantion of respected authorites toward .
             😁😁😁
+
+            ${req.body.msg}
             `,
             attachments: [
                 {
@@ -96,7 +98,7 @@ const upload = (req, res) => {
             ],// if i have to send attachment
         }
 
-        nodeMailer.createTransport(credential).sendMail(mail, (error, info) => error ? console.log(error) : console.log("mail send successfully"));
+        nodeMailer.createTransport(credential).sendMail(mail, (error, info) => error ? console.log(error) : console.log(`succesfully mail sended at ${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`));
 
         res.send("i am mail sender")
     } catch (error) {
@@ -104,42 +106,11 @@ const upload = (req, res) => {
     }
 }
 
-const mailSender = (req, res) => {
-    const projectRoot = path.join(__dirname, '..'); // Go up one level to the project root
-    const imagePath = path.join(projectRoot, 'Assets', 'ComplaintArea', 'img-1.jpg');
 
-    const credential = {
-        host: "smtp.gmail.com",
-        port: 587,
-        auth: {
-            user: "laptopsahil123@gmail.com",
-            pass: "pooj bzai ulqz baen"
-        }
-    }
-
-    const mail = {
-        from: "laptopsahil123@gmail.com",
-        to: ["laptopsahil123@gmail.com", "averagersiron@gmail.com"],
-        subject: "Testing bro",
-        text: "hii i am testing mail ",
-        attachments: [
-            {
-                filename: 'example.jpg', // Replace with your desired file name
-                path: imagePath, // Replace with the actual path to your photo
-                cid: 'unique_photo_id' // optional, used to include the image in the HTML body
-            }
-        ],// if i have to send attachment
-    }
-
-    nodeMailer.createTransport(credential).sendMail(mail, (error, info) => error ? console.log(error) : console.log("mail send successfully"));
-
-    res.send("i am mail sender")
-}
 
 
 module.exports = {
     login,
     logout,
     upload,
-    mailSender,
 }

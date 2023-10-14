@@ -1,5 +1,5 @@
 const express = require("express");
-const { login, logout, upload, mailSender } = require("./../Controllers/apiController");
+const { login, logout, upload } = require("./../Controllers/apiController");
 const multer = require("multer");
 const path = require("path");
 
@@ -43,6 +43,6 @@ router.post("/login", login);
 router.post("/upload", uploads, upload);
 
 router.get("/logout", logout); 
-router.get("/mail",mailSender);
+
 
 module.exports = router;
