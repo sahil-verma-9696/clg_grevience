@@ -27,13 +27,13 @@ const serveCategories = (req, res) => {
 
 const serveForm = async (req,res)=>{
     try {
-        console.log(req.params.category);
         const response = await Students.findOne({ crn: req.cookies.crn });
         return res.render("form", { user: response, userStatus: req.cookies.crn, URL: process.env.URL ,title:req.params.category});
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
+
 module.exports = {
     serveHome,
     serveProfile,

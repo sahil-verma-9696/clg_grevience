@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form action="<%= URL%>/" class="page">
+    <form action="<%= URL%>/api/upload" class="page" method="post" enctype="multipart/form-data">
         <div class="header">
             <h1>Grievences of : <span class="title"><%= title%></span></h1>
         </div>
@@ -21,7 +21,7 @@
             <option value="<%= user.crn%>"><%= user.crn%></option>
             <option value="annonymous"> X_X Annonymous X_X</option>
         </select>
-        <input class="subject" name="Subject" type="text" placeholder="Subject">
+        <input class="subject" name="subject" type="text" placeholder="Subject">
 
         <input class="fileUpload" type="file" name="evidence" id="">
 
