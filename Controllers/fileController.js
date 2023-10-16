@@ -7,6 +7,7 @@ const serveHome = (req, res) => {
 const serveLogin = (req, res) => {
     if (req.cookies.user) {
         res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "😊 you are already logined😊" });
+       
     } else {
         res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "😀 welcome to student grieviance 😀" });
     }
@@ -30,7 +31,7 @@ const serveForm = async (req,res)=>{
         const response = await Students.findOne({ crn: req.cookies.crn });
         return res.render("form", { user: response, userStatus: req.cookies.crn, URL: process.env.URL ,title:req.params.category});
     } catch (error) {
-        console.log(error);
+        console.log(error); 
     }
 }
 

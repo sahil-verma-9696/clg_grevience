@@ -3,7 +3,6 @@ const { login, logout, upload } = require("./../Controllers/apiController");
 const multer = require("multer");
 const path = require("path");
 
-const date = new Date();
 // Create a new Date object
 const currentDate = new Date();
 
@@ -30,7 +29,6 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         cb(null, `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}.jpg`);
-        // cb(null, 'photo-1' + path.extname(file.originalname));
     }
 })
 
@@ -40,7 +38,7 @@ const router = express.Router();
 
 
 router.post("/login", login);
-router.post("/upload", uploads, upload);
+router.post("/upload/:title", uploads, upload);
 
 router.get("/logout", logout); 
 
