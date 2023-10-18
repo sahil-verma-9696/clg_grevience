@@ -2,6 +2,7 @@ const Students = require("./../Model/students");
 const Complaint = require("./../Model/complaints");
 const nodeMailer = require("nodemailer");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const currentDate = new Date();
 
@@ -20,18 +21,61 @@ const ampm = hours >= 12 ? "PM" : "AM";
 hours = hours % 12;
 hours = hours ? hours : 12; // Handle midnight (0 hours)
 
-const login = async (req, res) => {
+const students_registration = async (req, res) => {
   try {
+    // Hashing the password
+    const plainPassword = req.body.password;
+    if (!plainPassword) {
+      return res.status(400).send('Password is required');
+    }
+
+    const hashedPass = await bcrypt.hash(plainPassword, 10);
+    // Check if the user already exists
+    const isUserExist = await Students.findOne({ crn: req.body.crn });
+
+    if (!isUserExist) {
+      // If the user does not exist, create a new user
+      const newUser = new Students({
+        crn: req.body.crn,
+        name: req.body.name,
+        eMail: req.body.eMail,
+        course: req.body.course,
+        password: hashedPass,
+        contact: req.body.contact,
+        branch: req.body.branch,
+        profile: req.body.profile,
+        complaint:req.body.complaint,
+      });
+
+      // Save the new user to the database
+      await newUser.save();
+
+      res.status(201).send('User registered successfully!');
+    } else {
+      // If the user already exists, send an appropriate response
+      res.status(400).send('CRN already exists');
+    }
+  } catch (error) {
+    console.error('Error in user registration:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+const login = async (req, res,next) => {
+  try {
+    
     if (req.body) {
       const user = await Students.findOne({ crn: req.body.crn });
       if (user) {
-        const isAuth = user.password == req.body.password;
+        const isAuth = bcrypt.compare(req.body.password,user.password);
         if (isAuth) {
           if (!req.cookies.user) {
             res.cookie("contact", user.contact, { maxAge: 2 * 60 * 60 * 1000 });
             res.cookie("user", user.name, { maxAge: 2 * 60 * 60 * 1000 });
             res.cookie("crn", user.crn, { maxAge: 2 * 60 * 60 * 1000 });
-            res.redirect("/"); 
+            // res.redirect("/");
+            next(); 
           } else {
             return res.render("login", {
               URL: process.env.ORIGINS,
@@ -111,8 +155,8 @@ const upload = async (req, res) => {
       time: `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`,
       evidence: `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}.jpg`
     });
-    const savedComplaint =  await complaints.save();
-    console.log(savedComplaint); 
+    const savedComplaint = await complaints.save();
+    console.log(savedComplaint);
 
     const mail = {
       from: "laptopsahil123@gmail.com",
@@ -134,8 +178,8 @@ const upload = async (req, res) => {
         error
           ? console.log(error)
           : console.log(
-              `succesfully mail sended at ${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`
-            )
+            `succesfully mail sended at ${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`
+          )
       );
 
     res.send("i am mail sender");
@@ -148,4 +192,5 @@ module.exports = {
   login,
   logout,
   upload,
+  students_registration,//✅
 };

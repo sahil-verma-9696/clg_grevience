@@ -22,6 +22,7 @@ nav h1 {
     font-size: 62px;
     text-shadow: 5px 13px 9px black;
     -webkit-text-stroke: 2px white;
+    text-transform: uppercase;
 }
 
 .links {
@@ -33,6 +34,7 @@ nav h1 {
     margin-right: 30px;
     color: white;
     font-size: 28px;
+    text-transform: uppercase;
 }
 .grieveance{
     margin-top: 10px;

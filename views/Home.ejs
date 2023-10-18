@@ -19,13 +19,12 @@
       <h1>Grievance</h1>
 
       <div class="links">
-        <a href="<% URL%>/categories" class="grieveance">grieveance category</i></a>
-
+        <a href="<% URL%>/categories" class="grieveance">grieveance category</a>
         <% if(userStatus){ %>
           <a href="<% URL%>/api/logout" class="loginBtn"> Logout</a>
-          <% }else{ %>
-            <a href="<% URL%>/login" class="loginBtn"> Login</a>
-            <% } %>
+        <% }else{ %>
+          <a href="<% URL%>/login" class="loginBtn"> Login</a>
+        <% } %>
       </div>
 
     </nav>

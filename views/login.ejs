@@ -24,7 +24,8 @@
                         <%= msg%>
                     </h1>
 
-                    <form action="<%= URL%>/api/login" method="post" class="form">
+                    <form class="form">
+                    <!-- <form action="<%= URL%>/api/login" method="post" class="form"> -->
                         <fieldset>
                             <legend>
                                 <span class="material-symbols-outlined">
@@ -45,6 +46,6 @@
             </center>
             <%}%>
 </body>
-<script type="module" src="/public/scripts/login/script.js"></script>
-
+<script src="/public/scripts/login/script.js"></script>
+<script>fetchData(`<%= URL%>`,`<%= apiKey%>`)</script>
 </html>

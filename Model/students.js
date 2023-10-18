@@ -13,11 +13,11 @@ const registrationSchema = new mongoose.Schema({
     trim: true,
   },
   contact: {
-    type:Number,
-    unique:true,
-    trim:true,
-    maxlength:10,
-    minlength:10,
+    type: Number,
+    unique: true,
+    trim: true,
+    maxlength: 10,
+    minlength: 10,
   },
   eMail: {
     type: String,
@@ -34,19 +34,15 @@ const registrationSchema = new mongoose.Schema({
   branch: {
     type: String,
     trim: true,
-  },
-  complaint: {
-    type: Object,
-    trim: true,
-  },
+  }, 
   password: {
     type: String,
     required: true,
     minlength: 8,
   },
-  profile:{
-    type:String,
-  }
+  profile: {
+    type: String,
+  },
 });
 
-module.exports = mongoose.model("students",registrationSchema)
+module.exports = mongoose.model("students", registrationSchema); 

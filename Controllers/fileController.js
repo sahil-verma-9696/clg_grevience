@@ -6,10 +6,10 @@ const serveHome = (req, res) => {
 
 const serveLogin = (req, res) => {
     if (req.cookies.user) {
-        res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "😊 you are already logined😊" });
-       
+        // res.render("login", { URL: process.env.ORIGINS,apiKey: process.env.API_KEY, userStatus: req.cookies.user, msg: "😊 you are already logined 😊" });
+        res.redirect("/");     
     } else {
-        res.render("login", { URL: process.env.ORIGINS, userStatus: req.cookies.user, msg: "😀 welcome to student grieviance 😀" });
+        res.render("login", { URL: process.env.ORIGINS,apiKey: process.env.API_KEY, userStatus: req.cookies.user, msg: "😀 welcome to student grieviance 😀" });
     }
 }
 
@@ -35,10 +35,15 @@ const serveForm = async (req,res)=>{
     }
 }
 
+const serveRegistration = (req,res)=>{
+    res.render("student_registration");
+}
+
 module.exports = {
     serveHome,
     serveProfile,
     serveLogin,
     serveCategories,
     serveForm,
+    serveRegistration,
 }

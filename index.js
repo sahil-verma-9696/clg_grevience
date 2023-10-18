@@ -13,7 +13,6 @@ const apiRouter = require("./Routes/apiRoutes");
 
 connect("miniproject");
 
-
 const app = express();
 const server = http.createServer(app);
 

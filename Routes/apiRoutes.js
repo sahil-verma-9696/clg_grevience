@@ -1,7 +1,7 @@
 const express = require("express");
-const { login, logout, upload } = require("./../Controllers/apiController");
+const { login, logout, upload, students_registration } = require("./../Controllers/apiController");
 const multer = require("multer");
-const path = require("path");
+const { isAuthorised } = require("../Middleware/authentication");
 
 // Create a new Date object
 const currentDate = new Date();
@@ -23,7 +23,7 @@ hours = hours ? hours : 12; // Handle midnight (0 hours)
 
 
 
-const storage = multer.diskStorage({
+const storageEvidence = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'Assets/Upload/');
     },
@@ -32,15 +32,26 @@ const storage = multer.diskStorage({
     }
 })
 
-const uploads = multer({ storage: storage }).single("evidence");
+const storageStudents = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'Assets/Students/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${req.body.crn}.jpg`);
+    }
+})
+
+const evidence = multer({ storage: storageEvidence }).single("evidence");
+const profile = multer({ storage: storageStudents }).single("profile");
 
 const router = express.Router();
 
 
-router.post("/login", login);
-router.post("/upload/:title", uploads, upload);
+router.post("/login",isAuthorised, login);
+router.post("/upload/:title", evidence, upload);
+router.post("/stu_registration",isAuthorised, profile, students_registration);
 
-router.get("/logout", logout); 
+router.get("/logout", logout);
 
 
 module.exports = router;
