@@ -1,0 +1,4 @@
+step - 1 : first create the array.
+step - 2 : take size and the element of array.
+step - 3 : n = n-1 
+step - 4 : int k = desireposition.
