@@ -5,43 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <!-- Link to your custom stylesheet for the profile page -->
     <link rel="stylesheet" href="/public/Style_sheets/Profile/style.css">
+    <!-- You can remove the following inline style if you prefer to use external styles -->
     <style>
-        
+        /* Custom inline styles can be added here */
     </style>
 </head>
 
 <body>
+    <!-- Container for the profile page -->
     <div class="container">
-        <%if(userStatus){%>
-        <a href="<%= URL%>/api/logout%>"> Logout</a>
-        <%}%>
+        <!-- Check if the user is logged in and provide a logout link if true -->
+        <% if (userStatus) { %>
+            <a href="<%= URL %>/api/logout">Logout</a>
+        <% } %>
+        <!-- User's profile picture -->
         <div class="dp">
-            <img src="<%= user.profile%>" alt="">
+            <img src="<%= user.profile %>" alt="User Profile Picture">
         </div>
+        <!-- Content section containing user information -->
         <div class="content">
+            <!-- Left column for personal information -->
             <div class="left">
                 <div class="c1">
+                    <!-- User information labels -->
                     <span class="key">Name</span>
                     <span class="key">Contact</span>
                     <span class="key">Gmail</span>
                 </div>
                 <div class="c2">
-                    <span class="value"> : <%= user.name%></span>
-                    <span class="value"> : <%= user.contact%></span>
-                    <span class="value"> : <%= user.eMail%></span>
+                    <!-- User information values -->
+                    <span class="value">: <%= user.name %></span>
+                    <span class="value">: <%= user.contact %></span>
+                    <span class="value">: <%= user.eMail %></span>
                 </div>
             </div>
+            <!-- Right column for academic information (CRN, Course, Branch) -->
             <div class="right">
                 <div class="c1">
+                    <!-- User information labels (CRN, Course, Branch) -->
                     <span class="key">CRN</span>
                     <span class="key">Course</span>
                     <span class="key">Branch</span>
                 </div>
                 <div class="c2">
-                    <span class="value"> : <%= user.crn%></span>
-                    <span class="value"> : <%= user.course%></span>
-                    <span class="value"> : <%= user.branch%></span>
+                    <!-- User information values (CRN, Course, Branch) -->
+                    <span class="value">: <%= user.crn %></span>
+                    <span class="value">: <%= user.course %></span>
+                    <span class="value">: <%= user.branch %></span>
                 </div>
             </div>
         </div>

@@ -4,34 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPLAINT REGARDING : <%= title %>
+    </title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="/Public/Style_sheets/Form/style.css">
-    <title>Grievences of : <%= title%></title>
 </head>
 
 <body>
-    <form action="<%= URL%>/api/upload/<%= title%>" class="page" method="post" enctype="multipart/form-data">
-        <div class="header">
-            <h1>Grievences of : <span class="title"><%= title%></span></h1>
-        </div>
-        <div class="sender">
-
-        </div>
-
-        <select class="user" name="user" id="">
-            <option value="<%= user.crn%>"><%= user.crn%></option>
-            <option value="annonymous"> X_X Annonymous X_X</option>
-        </select>
-        <input class="subject" name="subject" type="text" placeholder="Subject">
-
-        <input class="fileUpload" type="file" name="evidence" id="">
-
-        <textarea name="msg" id="" cols="30" rows="10" placeholder="Enter your Grievence"></textarea>
-
-        <div class="btn">
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
-        </div>
-    </form>
+    <div id="header">
+        <marquee direction="right">
+            <h1><span id="span">COMPLAINT REGARDING : <%= title %></span></h1>
+        </marquee>
+    </div>
+    <div id="root">
+        <center>
+            <div id="box">
+                <form action="<%= URL %>/api/upload/<%= title %>" method="post" enctype="multipart/form-data">
+                    <div>
+                        <select class="user" name="name" id="">
+                            <option value="<%= user.name %>">
+                                <%= user.name %>
+                            </option>
+                            <option value="anonymous">X_X Anonymous X_X</option>
+                        </select> 
+                        <select class="user" name="crn" id="">
+                            <option value="<%= user.crn %>"><%= user.crn %></option>
+                            <option value="anonymous">X_X Anonymous X_X</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <br>
+                    <div>
+                        <!-- COURSE:<select name="course" id="course" style="width: 148px;" required>
+                            <option value="b.tech" id="COURSE">B.TECH</option>
+                            <option value="DIPLOMA" id="COURSE">DIPLOMA</option>
+                            <option value="BBA" id="COURSE">BBA</option>
+                            <option value="MBA" id="COURSE">MBA</option>
+                            <option value="BCA" id="COURSE">BCA</option>
+                        </select>
+                        YEAR:<input type="number" name="year" id="year" min="1" max="4" style="width: 210px;" required> -->
+                    </div>
+                    <BR>
+                    <hr>
+                    <div>
+                        <!-- FACULTY NAME:
+                        <BR>
+                        <input type="text" name="faculty" id="FACULTY NAME" style="width: 484px;" required> -->
+                    </div>
+                    <hr>
+                    <div>
+                        SUBJECT
+                        <br>
+                        <input type="text" name="subject" id="sub" style="width: 484px;">
+                    </div>
+                    <br>
+                    <hr>
+                    <div>
+                        COMPLAINT:
+                        <br>
+                        <textarea name="msg" id="COMPLAINT" cols="30" rows="10" style="width: 484px;"
+                        placeholder="Enter your Grievance" required></textarea>
+                    </div>
+                    <br>
+                    UPLOAD PROOF IF ANY:<input type="file" name="evidence" id="proof" />
+                    <br>
+                    <hr>
+                    <!-- DATE OF COMPLAINT:<input type="date" name="date" id="date" required> -->
+                    <hr>
+                    <hr>
+                    <div>
+                        <BUtton type="submit" name="submit" id="submit"><B>SUBMIT</B></BUtton>
+                        <button type="reset" name="reset" id="reset">RESET</button>
+                    </div>
+                    <hr>
+                </form>
+            </div>
+        </center>
+        <br><br>
+    </div>
 </body>
-
 </html>

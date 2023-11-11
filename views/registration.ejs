@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration page </title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="http://localhost:3000/api/registration" method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="crn" placeholder="crn">
+        <input type="email" name="eMail" placeholder="eMail">
+        <input type="password" name="password" placeholder="password">
+        <input type="text" name="course" placeholder="course">
+        <input type="number" name="contact" placeholder="contact">
+        <input type="text" name="branch" placeholder="branch">
+        <input type="file" name="profile" placeholder="profile">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

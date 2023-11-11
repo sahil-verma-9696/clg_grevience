@@ -4,9 +4,10 @@ const isAuthorised = (req, res, next) => {
     if (token && token.startsWith("Bearer ")) {
         const authToken = token.substring(7);
 
-        const isAuthenticated = authToken === "secerateKey" ? 1 : 0;
-
-        if (isAuthenticated) {
+        const secureKey = "secerateKey";
+        
+        // Use a strict comparison (===) to check the validity of the token
+        if (authToken === secureKey) {
             next();  
         } else {
             res.status(401).json({ message: 'Invalid token' });
@@ -16,5 +17,4 @@ const isAuthorised = (req, res, next) => {
     }
 };
 
-
-module.exports = { isAuthorised }
+module.exports = { isAuthorised };

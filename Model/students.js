@@ -12,9 +12,12 @@ const registrationSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  sex:{
+    type:String,
+  },
   contact: {
     type: Number,
-    unique: true,
+    unique: false,
     trim: true,
     maxlength: 10,
     minlength: 10,
@@ -22,7 +25,7 @@ const registrationSchema = new mongoose.Schema({
   eMail: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
     trim: true,
     lowercase: true,
   },
@@ -42,6 +45,7 @@ const registrationSchema = new mongoose.Schema({
   },
   profile: {
     type: String,
+    default: "/Assets/Students/male.png"
   },
 });
 

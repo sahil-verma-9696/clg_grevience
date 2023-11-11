@@ -4,105 +4,72 @@ const nodeMailer = require("nodemailer");
 const path = require("path");
 const bcrypt = require("bcrypt");
 
-const currentDate = new Date();
+// Function to format the current date and time
+const formatDateTime = () => {
+  const currentDate = new Date();
+  const day = currentDate.getDate().toString().padStart(2, "0");
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = currentDate.getFullYear();
 
-// Get date components
-const day = currentDate.getDate().toString().padStart(2, "0");
-const month = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Note: Month is 0-based
-const year = currentDate.getFullYear();
+  let hours = currentDate.getHours();
+  const minutes = currentDate.getMinutes();
+  const seconds = currentDate.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
 
-// Get time components
-let hours = currentDate.getHours();
-const minutes = currentDate.getMinutes();
-const seconds = currentDate.getSeconds();
-const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
 
-// Convert 24-hour time to 12-hour time
-hours = hours % 12;
-hours = hours ? hours : 12; // Handle midnight (0 hours)
-
-const students_registration = async (req, res) => {
-  try {
-    // Hashing the password
-    const plainPassword = req.body.password;
-    if (!plainPassword) {
-      return res.status(400).send('Password is required');
-    }
-
-    const hashedPass = await bcrypt.hash(plainPassword, 10);
-    // Check if the user already exists
-    const isUserExist = await Students.findOne({ crn: req.body.crn });
-
-    if (!isUserExist) {
-      // If the user does not exist, create a new user
-      const newUser = new Students({
-        crn: req.body.crn,
-        name: req.body.name,
-        eMail: req.body.eMail,
-        course: req.body.course,
-        password: hashedPass,
-        contact: req.body.contact,
-        branch: req.body.branch,
-        profile: req.body.profile,
-        complaint:req.body.complaint,
-      });
-
-      // Save the new user to the database
-      await newUser.save();
-
-      res.status(201).send('User registered successfully!');
-    } else {
-      // If the user already exists, send an appropriate response
-      res.status(400).send('CRN already exists');
-    }
-  } catch (error) {
-    console.error('Error in user registration:', error);
-    res.status(500).send('Internal Server Error');
-  }
+  return `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`;
 };
 
-
-const login = async (req, res,next) => {
+const login = async (req, res, next) => {
   try {
-    
     if (req.body) {
       const user = await Students.findOne({ crn: req.body.crn });
       if (user) {
-        const isAuth = bcrypt.compare(req.body.password,user.password);
+        const isAuth = await bcrypt.compare(req.body.password, user.password);
         if (isAuth) {
           if (!req.cookies.user) {
             res.cookie("contact", user.contact, { maxAge: 2 * 60 * 60 * 1000 });
             res.cookie("user", user.name, { maxAge: 2 * 60 * 60 * 1000 });
             res.cookie("crn", user.crn, { maxAge: 2 * 60 * 60 * 1000 });
-            // res.redirect("/");
-            next(); 
+            next();
           } else {
-            return res.render("login", {
-              URL: process.env.ORIGINS,
-              userStatus: req.cookies.crn,
-              msg: "❌ user already exist ❌",
-            });
+            // return res.render("login", {
+            //   URL: process.env.ORIGINS,
+            //   userStatus: req.cookies.crn,
+            //   msg: "❌ User already exists ❌",
+            //   apiKey: process.env.API_KEY,
+            // });
+            res.send("❌ User already exists ❌");
           }
         } else {
-          return res.render("login", {
-            URL: process.env.ORIGINS,
-            userStatus: req.cookies.crn,
-            msg: "❌ user and password invalid ❌",
-          });
+          // return res.render("login", {
+          //   URL: process.env.ORIGINS,
+          //   userStatus: req.cookies.crn,
+          //   msg: "❌ User and password are invalid ❌",
+          //   apiKey: process.env.API_KEY,
+          // });
+          res.send("❌ User and password are invalid ❌");
         }
       } else {
-        return res.render("login", {
-          URL: process.env.ORIGINS,
-          userStatus: req.cookies.crn,
-          msg: "❌ user not found ❌",
-        });
+        // return res.render("login", {
+        //   URL: process.env.ORIGINS,
+        //   userStatus: req.cookies.crn,
+        //   msg: "❌ User not found ❌",
+        //   apiKey: process.env.API_KEY,
+        // });
+        res.send("❌ User not found ❌");
       }
     } else {
-      return res.render("login", {
-        URL: process.env.ORIGINS,
-        userStatus: req.cookies.crn,
-        msg: "request not recive",
-      });
+      // return res.render("login", {
+      //   URL: process.env.ORIGINS,
+      //   userStatus: req.cookies.crn,
+      //   msg: "Request not received",
+      //   apiKey: process.env.API_KEY,
+      // });
+
+      res.send("Request not receive");
     }
   } catch (error) {
     console.log(error);
@@ -121,15 +88,52 @@ const logout = (req, res) => {
   }
 };
 
+const students_registration = async (req, res) => {
+  try {
+    const plainPassword = req.body.password;
+    if (!plainPassword) {
+      return res.status(400).send('Password is required');
+    }
+
+    const hashedPass = await bcrypt.hash(plainPassword, 10);
+
+    const isUserExist = await Students.findOne({ crn: req.body.crn });
+
+    if (!isUserExist) {
+
+      const newUser = new Students({
+        crn: req.body.crn,
+        name: req.body.name,
+        eMail: req.body.eMail,
+        course: req.body.course,
+        password: hashedPass,
+        contact: req.body.contact,
+        branch: req.body.branch,
+        profile: req.file ? `/Assets/Students/stu_${req.body.name}_${req.body.crn}.jpg` : "/Assets/Students/male.png",
+      });
+
+      await newUser.save();
+
+      res.status(201).send('User registered successfully!');
+    } else {
+      res.status(400).send('CRN already exists');
+    }
+  } catch (error) {
+    console.error('Error in user registration:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
 const upload = async (req, res) => {
   try {
-    // console.log(req.body);
-    const projectRoot = path.join(__dirname, ".."); // Go up one level to the project root
+    const projectRoot = path.join(__dirname, "..");
     const imagePath = path.join(
       projectRoot,
       "Assets",
       "Upload",
-      `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}.jpg`
+      `${req.params.title}_${formatDateTime()}.jpg`
     );
 
     const credential = {
@@ -140,20 +144,27 @@ const upload = async (req, res) => {
         pass: process.env.MAIL_PASS,
       },
     };
+
     const msg = `
-        Dear Authorities,
+        Dear Sir,
+        I hope this email finds you well. My name is ${req.body.name}, and I am writing to bring to your attention a matter of concern that I have encountered during my time at Allen House Institute of Technology.
 
-        i ${req.body.user} drag the attantion of respected authorites toward .
-        😁😁😁
+        "${req.body.msg}"
 
-        ${req.body.msg}
+        Thank you for your time and attention to this matter. I appreciate your commitment to addressing student concerns and fostering a positive learning environment at Allen House Institute of Technology.
+        Sincerely,
+
+        ${req.body.name}
+        ${req.body.crn}
         `;
+
+    //storing complaint in data base 
     const complaints = new Complaint({
       title: req.params.title,
       subject: req.body.subject,
       mail: msg,
-      time: `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`,
-      evidence: `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}.jpg`
+      time: formatDateTime(),
+      evidence: req.file ? `/Assets/Upload/${req.params.title}_${formatDateTime()}.jpg` : null,
     });
     const savedComplaint = await complaints.save();
     console.log(savedComplaint);
@@ -163,26 +174,31 @@ const upload = async (req, res) => {
       to: ["laptopsahil123@gmail.com", "averagersiron@gmail.com"],
       subject: `${req.params.title}-${req.body.subject}`,
       text: msg,
-      attachments: [
+      attachments: req.file ? [
         {
-          filename: `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}.jpg`, // Replace with your desired file name
-          path: imagePath, // Replace with the actual path to your photo
-          cid: "unique_photo_id", // optional, used to include the image in the HTML body
+          filename: `${req.params.title}_${formatDateTime()}.jpg`,
+          path: imagePath,
+          cid: "unique_photo_id",
         },
-      ], // if i have to send attachment
+      ] : null,
     };
-    // console.log(complaints)
-    nodeMailer
-      .createTransport(credential)
-      .sendMail(mail, (error, info) =>
-        error
-          ? console.log(error)
-          : console.log(
-            `succesfully mail sended at ${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`
-          )
-      );
 
-    res.send("i am mail sender");
+    const transporter = nodeMailer.createTransport(credential);
+
+    await transporter.sendMail(
+      mail, (error, info) => {
+        console.log(info);
+
+        if (error) {
+          console.log("mailSender Eror \n", error)
+          res.render("response", { data: error });
+        } else {
+          console.log("mail sended");
+          res.render("response", { data: info });
+        }
+      }
+    );
+
   } catch (error) {
     console.log(error);
   }
@@ -192,5 +208,5 @@ module.exports = {
   login,
   logout,
   upload,
-  students_registration,//✅
+  students_registration,
 };

@@ -4,28 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to your custom stylesheet for the login page -->
     <link rel="stylesheet" href="/Public/Style_sheets/Login/style.css">
+    <!-- Link to a font stylesheet (Google Fonts) -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>Login</title>
 </head>
 
 <body>
-
-
-    <% if(userStatus){%>
-
-       <center> <h1> <%= msg%> </h1></center>
-
-        <%}else{%>
+    <% if(userStatus) { %>
+        <!-- Display a message when the user is already logged in -->
+        <center>
+            <h1>
+                <%= msg %>
+            </h1>
+        </center>
+        <% } else { %>
+            <!-- Display the login form when the user is not logged in -->
             <center>
                 <div class="form-container">
-                    <h1 class="response">
-                        <%= msg%>
+                    <h1 class="response-msg">
+                        <%= msg %>
                     </h1>
 
                     <form class="form">
-                    <!-- <form action="<%= URL%>/api/login" method="post" class="form"> -->
                         <fieldset>
                             <legend>
                                 <span class="material-symbols-outlined">
@@ -33,19 +37,62 @@
                                 </span>
                             </legend>
 
-                            <input type="text" name="crn" class="userName" placeholder="crn" required>
-                            <input type="password" name="password" class="new-password" n placeholder="Enter password"
+                            <!-- Input fields for username (CRN) and password -->
+                            <input type="text" name="crn" class="userName" placeholder="CRN" required>
+                            <input type="password" name="password" class="new-password" placeholder="Enter password"
                                 required>
+                            <!-- Login button -->
                             <button type="submit" class="submitBtn">Log in</button>
                         </fieldset>
-
                     </form>
 
+                    <!-- Error message area -->
                     <h2 class="regError"></h2>
                 </div>
             </center>
-            <%}%>
+            <% } %>
 </body>
-<script src="/public/scripts/login/script.js"></script>
-<script>fetchData(`<%= URL%>`,`<%= apiKey%>`)</script>
+
+<script>
+
+
+    // Function for fetching data when the form is submitted
+    const fetchData = (url, apiKey) => {
+        // JavaScript for handling form submission
+        const form = document.querySelector("form");
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            // Get form data
+            const formData = new FormData(form);
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${apiKey}`
+                },
+                body: JSON.stringify(Object.fromEntries(formData.entries()))
+            };
+
+            try {
+                const response = await fetch(`${url}/api/login`, options);
+                if (response) {
+                    // Reload the page after successful login
+                    const message = await response.text();
+                    const msgBox = document.querySelector(".response-msg");
+                    msgBox.innerHTML = "";
+                    const msg = document.createElement("h1");
+                    msg.classList.add("response");
+                    msg.innerHTML = message; 
+                    msgBox.appendChild(msg);
+                    location.reload();
+                }
+            } catch (error) {
+                console.log("Error during fetch:", error);
+            }
+        });
+    }
+    fetchData("<%= URL %>", "<%= apiKey %>");
+</script>
+
 </html>

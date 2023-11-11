@@ -1,3 +1,4 @@
+// Load required modules
 require("dotenv").config();
 const express = require("express");
 const http = require("http");
@@ -6,29 +7,41 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
-
+// Custom modules    
 const { connect } = require("./Database/database");
 const fileRouter = require("./Routes/fileRoutes");
 const apiRouter = require("./Routes/apiRoutes");
 
+// Database connection
 connect("miniproject");
 
+// Create Express app and HTTP server
 const app = express();
 const server = http.createServer(app);
 
-app.set("view engine","ejs");
+// Set the view engine to EJS
+app.set("view engine", "ejs");
 
-app.use(cors());
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); 
-app.use("/public",express.static(path.join(__dirname,"Public")));
-app.use("/assets",express.static(path.join(__dirname,"Assets"))); 
+// Middleware setup
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(cookieParser()); // Parse cookies
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded request bodies
+app.use(bodyParser.json()); // Parse JSON request bodies
 
-app.use("/api",apiRouter);//middleware
-app.use("/",fileRouter);// endpoint
+// Serve static files from the "Public" and "Assets" directories
+app.use("/public", express.static(path.join(__dirname, "Public")));
+app.use("/assets", express.static(path.join(__dirname, "Assets")));
 
-const PORT = 3000;
+// Define API routes under the "/api" path
+app.use("/api", apiRouter);
+
+// Define file routes at the root path ("/")
+app.use("/", fileRouter);
+
+// Define the port for the server
+const PORT = process.env.PORT || 3000; // Use the environment variable or default to 3000
+
+// Start the server
 server.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
-}) 
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
