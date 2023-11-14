@@ -1,4 +1,5 @@
 const multer = require("multer");
+const path = require("path");
 
 // Function to format the current date and time
 function formatDateTime() {
@@ -21,6 +22,20 @@ function formatDate(date) {
 
     return `${hours}-${minutes}-${seconds}-${ampm}`;
 }
+
+const projectRoot = path.join(__dirname, "..");
+const evedencePath = path.join(
+    projectRoot,
+    "Assets",
+    "Upload",
+  );
+const studentsPath = path.join( 
+    projectRoot,
+    "Assets",
+    "Students",
+  );
+
+  console.log(studentsPath)
 
 // Multer storage configuration function
 function evidenceMulterStorage(destination) {
@@ -47,10 +62,10 @@ function studentsMulterConfig(destination) {
 }
 
 // Create storage for evidence and profile pictures
-const evidenceStorage = evidenceMulterStorage('Assets/Upload/');
-const profileStorage = studentsMulterConfig('Assets/Students/');
+const evidenceStorage = evidenceMulterStorage(evedencePath);
+const profileStorage = studentsMulterConfig(studentsPath);
 
 const evidence = multer({ storage: evidenceStorage }).single("evidence");
 const profile = multer({ storage: profileStorage }).single("profile");
 
-module.exports = {evidence,profile}
+module.exports = {evidence,profile} 

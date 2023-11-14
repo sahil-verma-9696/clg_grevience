@@ -3,7 +3,7 @@ const Complaint = require("./../Model/complaints");
 const nodeMailer = require("nodemailer");
 const path = require("path");
 const bcrypt = require("bcrypt");
-const complaints = require("./../Model/complaints");
+
 
 // Function to format the current date and time
 const formatDateTime = () => {

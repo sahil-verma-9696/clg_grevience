@@ -22,6 +22,6 @@ router.post("/registration", profile, students_registration);
 router.get("/logout", logout);
 router.get("/getAllStudents", getAllStudents);
 router.get("/getAllComplaints", getAllComplaints);
-router.get("/getStudentByCrn", getStudentByCrn);
+router.get("/getStudentByCrn", getStudentByCrn); 
 
 module.exports = router;
