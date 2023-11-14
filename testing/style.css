@@ -1,0 +1,60 @@
+body {
+    background: #eef8ff;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to right, #fcfbfb, #f34a12);
+    color: #000;
+    padding: 10px 0 30px;
+    border-top-left-radius: 125px;
+    font-size: 15px;
+    line-height: 10px;
+}
+
+h3{
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+p{
+    font-size: 20px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.row {
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 70px;
+}
+
+/* .col {
+    flex-basis: 5%;
+    padding: 10px;
+} */
+
+.logo {
+    width: 100px;
+    margin-bottom: px;
+
+}
+
+.col {
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+    text-color: black;
+}
+
+.copy {
+    text-align: right;
+}

@@ -3,6 +3,7 @@ const Complaint = require("./../Model/complaints");
 const nodeMailer = require("nodemailer");
 const path = require("path");
 const bcrypt = require("bcrypt");
+const complaints = require("./../Model/complaints");
 
 // Function to format the current date and time
 const formatDateTime = () => {
@@ -22,6 +23,8 @@ const formatDateTime = () => {
   return `${day}-${month}-${year}_${hours}-${minutes}-${seconds}-${ampm}`;
 };
 
+// controller functions of endpoints
+
 const login = async (req, res, next) => {
   try {
     if (req.body) {
@@ -29,6 +32,7 @@ const login = async (req, res, next) => {
       if (user) {
         const isAuth = await bcrypt.compare(req.body.password, user.password);
         if (isAuth) {
+          req.session.authUser = user;
           if (!req.cookies.user) {
             res.cookie("contact", user.contact, { maxAge: 2 * 60 * 60 * 1000 });
             res.cookie("user", user.name, { maxAge: 2 * 60 * 60 * 1000 });
@@ -77,6 +81,12 @@ const login = async (req, res, next) => {
 };
 
 const logout = (req, res) => {
+  if (req.session.authUser) {
+    req.session.destroy(error => {
+      console.warn("Error in destroying user");
+      console.log(error);
+    })
+  }
   if (req.cookies.user) {
     res.clearCookie("contact");
     res.clearCookie("user");
@@ -124,8 +134,6 @@ const students_registration = async (req, res) => {
   }
 };
 
-
-
 const upload = async (req, res) => {
   try {
     const projectRoot = path.join(__dirname, "..");
@@ -165,9 +173,21 @@ const upload = async (req, res) => {
       mail: msg,
       time: formatDateTime(),
       evidence: req.file ? `/Assets/Upload/${req.params.title}_${formatDateTime()}.jpg` : null,
+      user: req.session.authUser._id,
     });
+
     const savedComplaint = await complaints.save();
+
+    const complaintStudent = await Students.findOne({
+      _id: req.session.authUser._id,
+    })
+
+    complaintStudent.complaints.push(savedComplaint._id);
+
+    const updateStudent = await complaintStudent.save();
+    console.log(updateStudent);
     console.log(savedComplaint);
+
 
     const mail = {
       from: "laptopsahil123@gmail.com",
@@ -204,9 +224,30 @@ const upload = async (req, res) => {
   }
 };
 
+const getAllStudents = async (req, res) => {
+  const students = await Students.find().populate("complaints");
+  res.send(students);
+}
+
+const getAllComplaints = async (req, res) => {
+  const allComplaints = await Complaint.find();
+  res.send(allComplaints);
+}
+
+const getStudentByCrn = async (req, res) => {
+  const student = await Students.findOne({
+    _id: req.session.authUser._id,
+  }).populate("complaints");
+  res.send(student)
+}
+
+
 module.exports = {
   login,
   logout,
   upload,
   students_registration,
+  getAllStudents,
+  getAllComplaints,
+  getStudentByCrn,
 };

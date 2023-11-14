@@ -24,24 +24,36 @@
       <!-- Navigation links -->
       <div class="links">
         <a href="<% URL%>/categories" class="grieveance">Grievance Category</a>
-        
+
         <!-- Conditional rendering based on 'userStatus' variable -->
         <% if(userStatus){ %>
           <a href="<% URL%>/api/logout" class="loginBtn">Logout</a>
-        <% } else { %>
-          <a href="<% URL%>/login" class="loginBtn">Login</a>
-        <% } %>
+          <% } else { %>
+            <a href="<% URL%>/login" class="loginBtn">Login</a>
+            <% } %>
       </div>
     </nav>
   </header>
 
   <main>
     <!-- Links to other pages or content (e.g., categories and user profile) -->
-    <a href="<%= URL%>/categories" class="card"><img src="/Assets/Home/img-2.jpg" alt=""></a>
-    <a href="<%= URL%>/profile" class="card"><img src="/Assets/Home/img-1.jpg" alt=""></a>
+    <a href="<%= URL%>/categories" class="card">
+      <img src="/Assets/Home/grievience.jpg" alt="">
+      <h1>Grievances</h1>
+    </a>
+
+    <a href="<%= URL%>/profile" class="card">
+      <img src="/Assets/Students/male.png" alt="">
+      <h1>Show Profile</h1>
+    </a>
+    <a href="<%= URL%>/admin" class="card">
+      <img src="/Assets/Home/adimin_card_logo.jpg" alt="">
+      <h1>The Admins</h1>
+    </a>
   </main>
 </body>
 
 <!-- Include a JavaScript file if needed -->
 <script type="module" src="/public/scripts/home/script.js"></script>
+
 </html>

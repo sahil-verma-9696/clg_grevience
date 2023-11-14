@@ -47,6 +47,12 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     default: "/Assets/Students/male.png"
   },
+  complaints : [
+    {
+      type : mongoose.Schema.Types.ObjectId,
+      ref: "complaints"
+    }
+  ]
 });
 
 module.exports = mongoose.model("students", registrationSchema); 

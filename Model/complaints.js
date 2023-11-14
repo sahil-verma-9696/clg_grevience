@@ -6,6 +6,10 @@ const complaintSchema = new mongoose.Schema({
   mail: String,
   evidence: String,
   time: String,
+  user:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"students"
+  }
 });
 
 module.exports = mongoose.model("complaints",complaintSchema);

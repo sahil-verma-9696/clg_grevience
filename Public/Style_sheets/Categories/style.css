@@ -5,6 +5,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body{
+    background-image: url("/Assets/Home/bg.jpg");
+}
+
 center {
     margin-top: 10px;
 }
@@ -16,6 +20,7 @@ center {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    text-transform: uppercase;
 }
 .head1 a{
     text-decoration: none;

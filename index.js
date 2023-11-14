@@ -6,6 +6,7 @@ const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const expressSession = require("express-session");
 
 // Custom modules    
 const { connect } = require("./Database/database");
@@ -23,6 +24,11 @@ const server = http.createServer(app);
 app.set("view engine", "ejs");
 
 // Middleware setup
+app.use(expressSession({
+    resave: false,
+    saveUninitialized: false,
+    secret:"abcd",
+})) // Enable express session for session creation
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(cookieParser()); // Parse cookies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded request bodies
